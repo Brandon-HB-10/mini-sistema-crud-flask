@@ -21,7 +21,8 @@ def inicio():
     except:
         return "Error al conectar"
     
-@app.route("/productos")
+
+@app.route("/productos")#agrege esta ruta para mostrar los productos
 def productos():
     con = conectar()
     cursor = con.cursor()
@@ -31,6 +32,9 @@ def productos():
 
     return render_template("productos.html", productos=datos)
 
+@app.route("/agregar_producto")#agregar producto
+def agregar_producto():
+    return render_template("agregar.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
