@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, render_template
 import psycopg2
 
-crud_m = Flask(__name__)
+app = Flask(__name__)
 
 def conectar():
     conexion = psycopg2.connect(
@@ -12,7 +12,7 @@ def conectar():
     )
     return conexion
 
-@crud_m.route("/")
+@app.route("/")
 def inicio():
     try:
         con = conectar()
@@ -20,6 +20,17 @@ def inicio():
         return "Conexión exitosa a PostgreSQL "
     except:
         return "Error al conectar"
+    
+@app.route("/productos")
+def productos():
+    con = conectar()
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM productos")
+    datos = cursor.fetchall()
+    con.close()
+
+    return render_template("productos.html", productos=datos)
+
 
 if __name__ == "__main__":
-    crud_m.run(debug=True)
+    app.run(debug=True)
