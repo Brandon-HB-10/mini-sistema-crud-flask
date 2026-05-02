@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import psycopg2
 
 app = Flask(__name__)
@@ -32,8 +32,17 @@ def productos():
 
     return render_template("productos.html", productos=datos)
 
-@app.route("/agregar_producto")#agregar producto
+
+@app.route("/agregar_producto", methods=["GET", "POST"])
 def agregar_producto():
+
+    if request.method == "POST":
+        tipo = request.form["tipo_producto"]
+        marca = request.form["marca"]
+
+        print(tipo)
+        print(marca)
+
     return render_template("agregar.html")
 
 if __name__ == "__main__":
