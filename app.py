@@ -20,7 +20,7 @@ def inicio():
         return "Conexión exitosa a PostgreSQL "
     except:
         return "Error al conectar"
-    
+
 
 @app.route("/productos")#agrege esta ruta para mostrar los productos
 def productos():
@@ -103,6 +103,70 @@ def eliminar_producto(id):
     con.close()
 
     return redirect("/productos")
+
+#Agregamos los mismo pero para Clientes :-----------
+
+@app.route("/clientes")
+def clientes():
+    con = conectar()
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM clientes ORDER BY id ASC")
+    datos = cursor.fetchall()
+    con.close()
+    return render_template("clientes.html", clientes=datos)
+
+
+@app.route("/agregar_cliente", methods=["GET", "POST"])
+def agregar_cliente():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        telefono = request.form["telefono"]
+        correo = request.form["correo"]
+        direccion = request.form["direccion"]
+
+        con = conectar()
+        cursor = con.cursor()
+        cursor.execute("INSERT INTO clientes (nombre, telefono, correo, direccion) "
+                       "VALUES (%s, %s, %s, %s)", (nombre, telefono, correo, direccion))
+        con.commit()
+        con.close()
+        return redirect("/clientes")
+
+    return render_template("agregar_cliente.html")
+
+
+@app.route("/editar_cliente/<int:id>", methods=["GET", "POST"])
+def editar_cliente(id):
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        telefono = request.form["telefono"]
+        correo = request.form["correo"]
+        direccion = request.form["direccion"]
+
+        con = conectar()
+        cursor = con.cursor()
+        cursor.execute("UPDATE clientes SET nombre=%s, telefono=%s, correo=%s, direccion=%s "
+                       "WHERE id=%s", (nombre, telefono, correo, direccion, id))
+        con.commit()
+        con.close()
+        return redirect("/clientes")
+
+    con = conectar()
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM clientes WHERE id = %s", (id,))
+    cliente = cursor.fetchone()
+    con.close()
+    return render_template("editar_cliente.html", cliente=cliente)
+
+
+@app.route("/eliminar_cliente/<int:id>")
+def eliminar_cliente(id):
+    con = conectar()
+    cursor = con.cursor()
+    cursor.execute("DELETE FROM clientes WHERE id = %s", (id,))
+    con.commit()
+    con.close()
+    return redirect("/clientes")
 
 
 if __name__ == "__main__":
