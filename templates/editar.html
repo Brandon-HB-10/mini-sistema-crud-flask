@@ -32,10 +32,10 @@
     <div class="mb-3">
       <label class="form-label">Estatus</label>
       <select class="form-select" name="estatus">
-        <option value="Activo" {% if producto[3] == 'Activo' %}selected{% endif %}>Activo</option>
-        <option value="Inactivo" {% if producto[3] == 'Inactivo' %}selected{% endif %}>Inactivo</option>
-        <option value="Pendiente" {% if producto[3] == 'Pendiente' %}selected{% endif %}>Pendiente</option>
-      </select>
+  <option value="Disponible" {% if producto[3] == 'Disponible' %}selected{% endif %}>Disponible</option>
+  <option value="En espera" {% if producto[3] == 'En espera' %}selected{% endif %}>En espera</option>
+  <option value="Agotado" {% if producto[3] == 'Agotado' %}selected{% endif %}>Agotado</option>
+</select>
     </div>
     <div class="mb-3">
       <label class="form-label">Fecha</label>
