@@ -90,5 +90,20 @@ def editar_producto(id):
     con.close()
 
     return render_template("editar.html", producto=producto)
+
+@app.route("/eliminar_producto/<int:id>")
+def eliminar_producto(id):
+
+    con = conectar()
+    cursor = con.cursor()
+
+    cursor.execute("DELETE FROM productos WHERE id = %s", (id,))
+
+    con.commit()
+    con.close()
+
+    return redirect("/productos")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -30,6 +30,10 @@
 <td>{{ p[6] }}</td>
 <td>
     <a href="/editar_producto/{{ p[0] }}">Editar</a>
+    |
+    <a href="/eliminar_producto/{{ p[0] }}" onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
+    Eliminar
+</a>
 </td>
 
 </tr>
