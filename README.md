@@ -49,10 +49,10 @@ El archivo `CRUD DE MAYORISTA DE COMPUTO.sql` contiene la estructura de la base 
 ## 📸 Capturas
 
 ### Productos
-![Productos](capturas/productos.png)
+![Productos](capturas/Productos.png)
 
 ### Clientes
-![Clientes](capturas/clientes.png)
+![Clientes](capturas/Clientes.png)
 
 ---
 Desarrollado por **Brandon-HB-10** · Ingeniería en TICs
