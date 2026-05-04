@@ -1,0 +1,31 @@
+<h1>Editar Producto</h1>
+
+<form method="POST">
+    <label>Tipo:</label>
+    <input type="text" name="tipo_producto" value="{{ producto[1] }}">
+
+    <br><br>
+
+    <label>Marca:</label>
+    <input type="text" name="marca" value="{{ producto[2] }}">
+
+    <br><br>
+    <label>Estatus:</label>
+    <input type="text" name="estatus" value="{{ producto[3] }}">
+
+    <br><br>
+    <label>Fecha:</label>
+    <input type="text" name="fecha" value="{{ producto[4] }}">
+
+    <br><br>
+
+    <label>Cantidad:</label>
+    <input type="text" name="cantidad" value="{{ producto[5] }}">
+
+    <br><br><label>Precio:</label>
+    <input type="text" name="precio" step="0.01" value="{{ producto[6] }}">
+
+    <br><br>
+<button type="submit">Actualizar</button>
+
+</form>

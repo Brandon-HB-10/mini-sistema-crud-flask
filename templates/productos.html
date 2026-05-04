@@ -16,6 +16,7 @@
 <th>Fecha</th>
 <th>Cantidad</th>
 <th>Precio</th>
+<th>Acciones</th>
 </tr>
 
 {% for p in productos %}
@@ -27,6 +28,10 @@
 <td>{{ p[4] }}</td>
 <td>{{ p[5] }}</td>
 <td>{{ p[6] }}</td>
+<td>
+    <a href="/editar_producto/{{ p[0] }}">Editar</a>
+</td>
+
 </tr>
 {% endfor %}
 

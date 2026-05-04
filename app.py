@@ -26,7 +26,7 @@ def inicio():
 def productos():
     con = conectar()
     cursor = con.cursor()
-    cursor.execute("SELECT * FROM productos")
+    cursor.execute("SELECT * FROM productos ORDER BY id ASC")
     datos = cursor.fetchall()
     con.close()
 
@@ -58,5 +58,37 @@ def agregar_producto():
 
     return render_template("agregar.html")
 
+
+@app.route("/editar_producto/<int:id>", methods=["GET", "POST"])
+def editar_producto(id):
+    if request.method == "POST":
+        tipo = request.form["tipo_producto"]
+        marca = request.form["marca"]
+        estatus = request.form["estatus"]
+        fecha = request.form["fecha"]
+        cantidad = request.form["cantidad"]
+        precio = request.form["precio"]
+        
+        con = conectar()
+        cursor = con.cursor()
+
+        cursor.execute("UPDATE productos SET tipo_producto=%s," \
+        " marca=%s, estatus=%s, fecha_entrega=%s, cantidad=%s," \
+        " precio_compra=%s WHERE id=%s",(tipo, marca, estatus, fecha, cantidad, precio, id))
+
+        con.commit()
+        con.close()
+
+        return redirect("/productos")
+
+    con = conectar()
+    cursor = con.cursor()
+
+    cursor.execute("SELECT * FROM productos WHERE id = %s", (id,))
+    producto = cursor.fetchone()
+
+    con.close()
+
+    return render_template("editar.html", producto=producto)
 if __name__ == "__main__":
     app.run(debug=True)
