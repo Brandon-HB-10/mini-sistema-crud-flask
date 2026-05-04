@@ -1,15 +1,29 @@
-<h1>Agregar Producto</h1>
+<form method="POST">
 
-<form methtod="POST">
-    <label>Tipo de producto:</label>
-    <input type="text" name ="tipo_producto">
+<label>Tipo de producto:</label>
+<input type="text" name="tipo_producto">
+<br><br>
 
-    <br><br>
+<label>Marca:</label>
+<input type="text" name="marca">
+<br><br>
 
-    <label>Marca:</label>
-    <input type="text" name ="marca">
+<label>Estatus:</label>
+<input type="text" name="estatus">
+<br><br>
 
-    <br><br>
+<label>Fecha:</label>
+<input type="date" name="fecha">
+<br><br>
 
-    <button type="submit">Guardar</button>
+<label>Cantidad:</label>
+<input type="number" name="cantidad">
+<br><br>
+
+<label>Precio:</label>
+<input type="number" name="precio" step="0.01">
+<br><br>
+
+<button type="submit">Guardar</button>
+
 </form>

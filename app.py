@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import psycopg2
 
 app = Flask(__name__)
@@ -39,9 +39,22 @@ def agregar_producto():
     if request.method == "POST":
         tipo = request.form["tipo_producto"]
         marca = request.form["marca"]
+        estatus = request.form["estatus"]
+        fecha = request.form["fecha"]
+        cantidad = request.form["cantidad"]
+        precio = request.form["precio"]
 
-        print(tipo)
-        print(marca)
+
+        con = conectar()
+        cursor = con.cursor()
+
+        cursor.execute("INSERT INTO productos (tipo_producto, marca, estatus, fecha_entrega, cantidad, precio_compra) " \
+        "VALUES (%s, %s, %s, %s, %s, %s)",(tipo, marca, estatus, fecha, cantidad, precio))
+
+        con.commit()
+        con.close()
+
+        return redirect("/productos")
 
     return render_template("agregar.html")
 
