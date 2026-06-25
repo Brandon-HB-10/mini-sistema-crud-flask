@@ -9,7 +9,7 @@ def conectar():
         host="localhost",
         database="proyecto_crud",
         user="postgres",
-        password="BranAkerman456"
+        password=""""""""
     )
     return conexion
 
